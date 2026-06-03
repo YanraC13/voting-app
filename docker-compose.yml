@@ -1,0 +1,14 @@
+services:
+  voting-app:
+    build: .
+    ports:
+      - "8080:80"
+    environment:
+      - REDIS=redis-db
+      - REDIS_PWD=mon_pass
+    depends_on:
+      - redis-db
+
+  redis-db:
+    image: redis:alpine
+    command: redis-server --requirepass mon_pass
